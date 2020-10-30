@@ -1,2 +1,14 @@
-exe_a:
-	gcc  max.c -I ../include ../lib/libmax.a -o exe_a
+exe_a:libmax.a libsum.a
+	gcc -o exe_a main.c -I../include -L../lib -lmax -lsum
+
+libmax.a:max.o
+	ar rcs ../lib/libmax.a max.o
+
+max.o:max.c
+	gcc -c max.c -o max.o -I../include
+
+libsum.a:sum.o
+	ar rcs ../lib/libsum.a sum.o
+
+sum.o:sum.c
+	gcc -c sum.c -o sum.o -I../include
